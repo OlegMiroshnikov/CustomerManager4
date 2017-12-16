@@ -1,0 +1,83 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+</head>
+<br>
+<body>
+<button onclick="getCustomersList()">Get customers list.json</button>
+<script>
+    function getCustomersList() {
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', 'http://localhost:8080/api/customers', false);
+        xhr.send();
+        if (xhr.status != 200) {
+            alert('Error ' + xhr.status + ': ' + xhr.statusText);
+        } else {
+            alert(xhr.responseText);
+        }
+    }
+</script>
+<br>
+</br>
+<button onclick="addCustomer()">Add new customer.json</button>
+<script>
+    function addCustomer() {
+        var xhr = new XMLHttpRequest();
+        var json = JSON.stringify({
+            regNr: "7777777777",
+            name: "Name7",
+            address: "Address7",
+            email: "EMail7"
+        });
+        xhr.open("POST", 'http://localhost:8080/api/customers', false);
+        xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+        xhr.send(json);
+        if (xhr.status != 200) {
+            alert('Error ' + xhr.status + ': ' + xhr.statusText);
+        } else {
+            alert(xhr.responseText);
+        }
+    }
+</script>
+<br>
+</br>
+<button onclick="updateCustomer()">Update customer.json</button>
+<script>
+    function updateCustomer() {
+        var xhr = new XMLHttpRequest();
+        var params = 25;
+        var json = JSON.stringify({
+            regNr: "77Updated",
+            name: "Name7Upbated",
+            address: "Address7Updated",
+            email: "EMail7Updated"
+        });
+        xhr.open("PUT", 'http://localhost:8080/api/customers/' + params, false);
+        xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+        xhr.send(json);
+        if (xhr.status != 200) {
+            alert('Error ' + xhr.status + ': ' + xhr.statusText);
+        } else {
+            alert(xhr.responseText);
+        }
+    }
+</script>
+<br>
+</br>
+<button onclick="deleteCustomer()">Delete customer.json</button>
+<script>
+    function deleteCustomer() {
+        var xhr = new XMLHttpRequest();
+        var params = 28;
+        xhr.open("DELETE", 'http://localhost:8080/api/customers/' + params, false);
+        xhr.send();
+        if (xhr.status != 200) {
+            alert('Error ' + xhr.status + ': ' + xhr.statusText);
+        } else {
+            alert(xhr.responseText);
+        }
+    }
+</script>
+</body>
+</html>
